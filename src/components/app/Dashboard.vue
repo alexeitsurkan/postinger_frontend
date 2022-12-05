@@ -4,17 +4,17 @@
       <Header/>
     </el-header>
     <el-container class="container-aside">
-        <el-aside>
-          <Aside/>
-        </el-aside>
-        <el-container class="container-main">
-          <el-main>
-            <Main/>
-          </el-main>
-          <el-footer>
-            <Footer/>
-          </el-footer>
-        </el-container>
+      <el-aside>
+        <Aside/>
+      </el-aside>
+      <el-container class="container-main">
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+        <el-footer>
+          <Footer/>
+        </el-footer>
+      </el-container>
     </el-container>
   </el-container>
 </template>
@@ -22,7 +22,6 @@
 <script>
 import Header from './layout/Header.vue'
 import Aside from './layout/Aside.vue'
-import Main from './layout/Main.vue'
 import Footer from './layout/Footer.vue'
 
 export default {
@@ -30,7 +29,6 @@ export default {
   components: {
     Header,
     Aside,
-    Main,
     Footer,
   }
 }
@@ -55,18 +53,20 @@ export default {
   overflow: auto;
 }
 
-.el-aside{
+.el-aside {
   height: 100%;
+  background-color: #545c64;
 }
 
-.container-main{
+.container-main {
   overflow: auto;
 }
 
-.el-main{
+.el-main {
   min-height: 100vh;
 }
-.el-footer{
+
+.el-footer {
   min-height: 12px;
   background: #ccc;
 }
