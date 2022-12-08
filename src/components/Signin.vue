@@ -13,8 +13,10 @@
             <el-input v-model="password" placeholder="password"/>
           </el-row>
           <el-row class="mb-4">
-              <el-button class="mr-4" type="primary">Login</el-button>
-              <el-button><router-link to="/signup">Sign up</router-link></el-button>
+            <el-button class="mr-4" type="primary" @click="onSubmit">Login</el-button>
+            <el-button>
+              <router-link to="/signup">Sign up</router-link>
+            </el-button>
           </el-row>
         </el-card>
       </div>
@@ -24,14 +26,28 @@
 
 <script>
 export default {
-  name: 'SignIn'
+  name: 'SignIn',
+  data() {
+    return {
+      email: null,
+      password: null,
+    }
+  },
+  methods: {
+    async onSubmit() {
+      this.$store.dispatch('Login', this.email, this.password).then(() => {
+        this.$router.push({name: 'Home'})
+      });
+    }
+  }
 }
 </script>
 
 <style>
-.fon{
+.fon {
   background: #ccc;
 }
+
 .login {
   display: table;
   width: 480px;
