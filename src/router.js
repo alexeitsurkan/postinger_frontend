@@ -2,7 +2,8 @@ import {createRouter, createWebHashHistory} from 'vue-router';
 import Signin from './components/Signin.vue';
 import Signup from './components/Signup.vue';
 import Dashboard from './components/app/Dashboard.vue';
-import Post from './components/app/Post.vue';
+import Post from './components/app/post/Post.vue';
+import PostForm from './components/app/post/PostForm.vue';
 import Account from './components/app/Account.vue';
 import Place from './components/app/Place.vue';
 
@@ -11,9 +12,9 @@ const router = createRouter({
     routes: [
         {name: 'Signin', path: '/signin', component: Signin},
         {name: 'Signup', path: '/signup', component: Signup},
-        {
-            name: 'Home', path: '/', component: Dashboard, children: [
-                {path: '/posts', component: Post},
+        {path: '/', component: Dashboard, children: [
+                { name: 'Home', path: '/posts', component: Post},
+                {path: '/posts/post-form', component: PostForm},
                 {path: '/accounts', component: Account},
                 {path: '/places', component: Place},
             ]
