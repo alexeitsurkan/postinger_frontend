@@ -25,9 +25,9 @@ export default createStore({
         },
     },
     actions: {
-        login({commit}, {email, password}) {
-            AuthAPI.login(email, password).then((res) => {
-                commit('setToken', res.token);
+        async login({commit},{email, password}) {
+            await AuthAPI.login(email, password).then((res) => {
+                commit('setToken', res.data.token);
                 DefaultAPIInstance.defaults.headers['authorization'] = `Bearer ${res.token}`
             })
         },

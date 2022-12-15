@@ -4,7 +4,7 @@
       label-width="auto"
   >
     <el-form-item label="Место публикации">
-      <el-select v-model="publicPlaceValue" placeholder="">
+      <el-select v-model="publicPlaceId" placeholder="">
         <el-option
             v-for="item in publicPlaces"
             :key="item.value"
@@ -14,15 +14,6 @@
       </el-select>
     </el-form-item>
 
-    <el-form-item label="Название поста">
-      <el-input
-          v-model="title"
-          maxlength="50"
-          placeholder=""
-          show-word-limit
-          type="text"
-      />
-    </el-form-item>
     <el-form-item label="Текст поста">
       <el-input
           v-model="text"
@@ -42,29 +33,34 @@
     </el-form-item>
     <el-form-item>
 
-      <el-button type="primary">Добавить пост</el-button>
+      <el-button type="primary" @click="submitPost">Добавить пост</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
+import {Post} from "@/api/post";
 
 export default {
   name: 'PostForm',
   data() {
     return {
       publicPlaces: [],
-      publicPlaceValue: '',
+      publicPlaceId: '',
       text: '',
-      title: '',
       datetime: '',
       defaultTime: new Date()
     }
   },
   created() {
   },
-  methods: {}
-
+  methods: {
+    submitPost(){
+      Post.add(this.publicPlaceId, this.text, this.datetime).then((res) => {
+        if (res) this.$router.push({name: 'Home'})
+      })
+    }
+  }
 }
 </script>
 

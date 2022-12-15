@@ -17,7 +17,7 @@ export default {
   name: 'HeaderLayout',
   methods: {
     logout() {
-      this.$store.dispatch('Logout').then(() => {
+      this.$store.dispatch('logout').then(() => {
         this.$router.push({name: 'Signin'})
       });
     },

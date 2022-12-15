@@ -3,21 +3,27 @@
     <div class="login">
       <div class="box-card">
         <el-card>
-          <el-row class="mb-4">
-            <h2>Login</h2>
-          </el-row>
-          <el-row class="mb-4">
-            <el-input v-model="email" placeholder="email"/>
-          </el-row>
-          <el-row class="mb-4">
-            <el-input v-model="password" placeholder="password"/>
-          </el-row>
-          <el-row class="mb-4">
-            <el-button class="mr-4" type="primary" @click="onSubmit">Login</el-button>
-            <el-button>
-              <router-link to="/signup">Sign up</router-link>
-            </el-button>
-          </el-row>
+          <el-form
+              status-icon
+              label-width="auto"
+          >
+
+            <el-row class="mb-4">
+              <h2>Login</h2>
+            </el-row>
+            <el-form-item>
+              <el-input id="email" v-model="email" placeholder="email"/>
+            </el-form-item>
+            <el-form-item>
+              <el-input id="password" type="password" v-model="password" placeholder="password"/>
+            </el-form-item>
+            <el-form-item>
+              <el-button class="mr-4" type="primary" @click="onSubmit">Login</el-button>
+              <el-button>
+                <router-link to="/signup">Sign up</router-link>
+              </el-button>
+            </el-form-item>
+          </el-form>
         </el-card>
       </div>
     </div>
@@ -34,8 +40,8 @@ export default {
     }
   },
   methods: {
-    async onSubmit() {
-      this.$store.dispatch('Login', this.email, this.password).then(() => {
+    onSubmit() {
+      this.$store.dispatch('login', {email: this.email, password: this.password}).then(() => {
         this.$router.push({name: 'Home'})
       });
     }

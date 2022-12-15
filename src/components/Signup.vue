@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {AuthAPI} from "@/api/auth";
+import {User} from "@/api/user";
 
 export default {
   name: 'SignUp',
@@ -36,8 +36,8 @@ export default {
     }
   },
   methods: {
-    async onSubmit() {
-      AuthAPI.login(this.email, this.password).then((res) => {
+    onSubmit() {
+      User.add(this.email, this.password).then((res) => {
         if (res) this.$router.push({name: 'Signin'})
       })
     }

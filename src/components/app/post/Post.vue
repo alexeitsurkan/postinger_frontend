@@ -6,12 +6,12 @@
   </el-row>
   <el-row class="mb-4">
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="Дата"/>
-      <el-table-column prop="name" label="Заголовок"/>
-      <el-table-column fixed="right" label="Operations">
-        <template #default>
-          <el-button link type="primary" size="small" @click="handleEdit"><el-icon><Edit /></el-icon></el-button>
-          <el-button link type="primary" size="small" @click="handleDelete"><el-icon><Delete /></el-icon></el-button>
+      <el-table-column prop="datetime" label="Дата"/>
+      <el-table-column prop="text" label="Текст"/>
+      <el-table-column fixed="right" label="">
+        <template #default="scope">
+          <el-button link type="primary" size="small" @click="handleEdit(scope.$index, scope.row)"><el-icon><Edit /></el-icon></el-button>
+          <el-button link type="primary" size="small" @click="handleDelete(scope.$index, scope.row)"><el-icon><Delete /></el-icon></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -21,6 +21,8 @@
 
 <script>
 
+import {Post} from "@/api/post";
+
 export default {
   name: 'PostComponent',
   data() {
@@ -29,35 +31,25 @@ export default {
     }
   },
   created() {
-    this.tableData = [
-      {
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-      },
-    ]
+
+    Post.get().then((res) => {
+      res.data.forEach((item) => {
+        this.tableData.push({
+          id: item.id,
+          datetime: item.datetime.date,
+          text: item.text,
+        });
+      })
+    })
   },
   methods:{
-    handleDelete(){
-
+    handleDelete(index, item){
+      Post.delete(item.id).then(() => {
+        this.tableData.splice(index, 1)
+      })
     },
-    handleEdit(){
-
+    handleEdit(index, item){
+      console.log(index, item);
     }
   }
 }

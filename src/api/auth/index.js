@@ -4,7 +4,7 @@ import {LoginAPIInstance, DefaultAPIInstance} from "@/api";
 export const AuthAPI = {
     login(email, password) {
         const url = '/login';
-        const data = {email, password};
+        const data = {username:email, password:password};
 
         return LoginAPIInstance.post(url, data)
     },
