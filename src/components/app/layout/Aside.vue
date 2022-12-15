@@ -14,13 +14,6 @@
         <span>Posts</span>
       </el-menu-item>
 
-      <el-menu-item index="/places">
-        <el-icon>
-          <Place/>
-        </el-icon>
-        <span>Public Places</span>
-      </el-menu-item>
-
       <el-menu-item index="/accounts">
         <el-icon>
           <StarFilled/>

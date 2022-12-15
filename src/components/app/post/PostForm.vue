@@ -7,9 +7,9 @@
       <el-select v-model="publicPlaceId" placeholder="">
         <el-option
             v-for="item in publicPlaces"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
         />
       </el-select>
     </el-form-item>
@@ -40,6 +40,7 @@
 
 <script>
 import {Post} from "@/api/post";
+import {PublicPlace} from "@/api/publicPlace";
 
 export default {
   name: 'PostForm',
@@ -53,6 +54,9 @@ export default {
     }
   },
   created() {
+    PublicPlace.get().then((res) => {
+      this.publicPlaces =  res.data
+    })
   },
   methods: {
     submitPost(){
