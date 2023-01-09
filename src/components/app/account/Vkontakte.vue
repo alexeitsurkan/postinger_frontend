@@ -3,12 +3,9 @@
   <template v-if="currentStep === 1">
     <el-form status-icon label-width="auto">
       <ol>
-        <li>В поле <b>Ссылка на профиль</b> введите ссылку на профиль, который хотите подключить. Вы можете
-          найти
-          ее в разделе Информация канала или группы. Добавьте несколько пабликов, если необходимо, кликнув на
-          Добавить новый паблик .
+        <li>В поле <b>Ссылка на профиль</b> введите ссылку на профиль, который хотите подключить.
         </li>
-        <li>В поле <b>Токен</b> бота введите токен, полученный от @BotFather после успешного создания бота.
+        <li>В поле <b>Токен</b> введите токен.
         </li>
       </ol>
 
@@ -55,13 +52,11 @@
 
 import {Account} from "@/api/account";
 import {PublicPlace} from "@/api/publicPlace";
-import {Platform} from "@/api/platform";
 
 export default {
   name: 'VkontakteComponent',
   data() {
     return {
-      platforms: [],
       step1: {
         token: null,
         id: null,
@@ -75,16 +70,12 @@ export default {
       currentStep: 1,
     }
   },
-  created() {
-    Platform.get().then((res) => {
-      this.platforms = res.data;
-    });
-  },
   methods: {
     submitVkontakte() {
-      Account.add(this.platforms.Vkontakte, this.step1.id, this.step1.token).then((res) => {
+      let platform = this.$store.state.platforms.Vkontakte;
+      Account.add(platform, this.step1.id, this.step1.token).then((res) => {
         this.step2.account_id = res.data;
-        PublicPlace.pull(this.platforms.Vkontakte,this.step2.account_id).then((res) => {
+        PublicPlace.pull(platform,this.step2.account_id).then((res) => {
           this.currentStep=2;
           this.step2.places = res.data;
         })

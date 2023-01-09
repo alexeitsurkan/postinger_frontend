@@ -19,7 +19,7 @@
   </el-card>
 
   <el-card class="box-card">
-    <el-row class="mt-8">
+
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="platform" label="Платформа"/>
         <el-table-column prop="account_id" label="Аккаунт"/>
@@ -33,7 +33,6 @@
           </template>
         </el-table-column>
       </el-table>
-    </el-row>
   </el-card>
 
 </template>

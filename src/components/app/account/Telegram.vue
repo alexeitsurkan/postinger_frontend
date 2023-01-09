@@ -18,8 +18,13 @@
         <el-input v-model="token"/>
       </el-form-item>
 
-      <el-form-item label="Ссылка на паблик">
-        <el-input v-model="src" placeholder="https://t.me/your-public-key"/>
+      <el-form-item v-for="(href, index) in hrefs" :key="index" label="Ссылка на паблик">
+        <el-input v-model="hrefs[index]" placeholder="https://t.me/your-public-key"/>
+        <el-button v-if="index !== 0" @click="handleDelete(index)">Удалить</el-button>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="default" @click="addNewPublic">Добавить новый паблик</el-button>
       </el-form-item>
 
       <el-form-item>
@@ -32,29 +37,31 @@
 <script>
 
 import {Account} from "@/api/account";
-import {Platform} from "@/api/platform";
+
 
 export default {
   name: 'TelegramComponent',
   data() {
     return {
-      platforms: [],
       token: null,
-      src: null,
+      hrefs: [''],
     }
-  },
-  created() {
-    Platform.get().then((res) => {
-      this.platforms = res.data;
-    });
   },
   methods: {
     submitTelegram() {
       let account_id = this.tg.src.split('/').pop();
-      Account.add(this.platforms.Telegram, account_id, this.tg.token).then(() => {
+      Account.add(this.$store.state.platforms.Telegram, account_id, this.tg.token).then(() => {
 
       })
     },
+    addNewPublic(){
+      this.hrefs.push('');
+    },
+    handleDelete(index){
+      alert(index);
+      delete this.hrefs[index];
+      alert(this.hrefs);
+    }
   }
 }
 </script>

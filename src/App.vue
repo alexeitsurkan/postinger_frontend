@@ -3,8 +3,15 @@
 </template>
 
 <script>
+import {Platform} from "@/api/platform";
+
 export default {
   name: 'App',
+  created() {
+    Platform.get().then((res) => {
+      this.$store.commit('setPlatforms', res.data);
+    });
+  },
   components: {}
 }
 </script>

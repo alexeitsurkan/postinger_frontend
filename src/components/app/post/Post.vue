@@ -4,7 +4,8 @@
     <el-button type="primary">Добавить пост</el-button>
     </router-link>
   </el-row>
-  <el-row class="mb-4">
+
+  <el-card class="box-card">
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="datetime" label="Дата"/>
       <el-table-column prop="text" label="Текст"/>
@@ -15,7 +16,7 @@
         </template>
       </el-table-column>
     </el-table>
-  </el-row>
+  </el-card>
 
 </template>
 
@@ -56,5 +57,9 @@ export default {
 </script>
 
 <style scoped>
-
+.box-card {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+}
 </style>

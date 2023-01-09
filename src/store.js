@@ -8,7 +8,8 @@ export default createStore({
         return {
             user: {
                 token: localStorage.getItem('token') || null,
-            }
+            },
+            platforms: [],
         }
     },
     getters: {
@@ -23,6 +24,9 @@ export default createStore({
             localStorage.removeItem('token')
             state.user.token = null;
         },
+        setPlatforms(state,platforms){
+            state.platforms = platforms;
+        }
     },
     actions: {
         async login({commit},{email, password}) {
